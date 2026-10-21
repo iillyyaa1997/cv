@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ilya Volkov — CV</title>
+<meta name="description" content="Ilya Volkov — Backend / DevOps Engineer (Python, Kubernetes), Belgrade">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Shared base for all CV layouts: tokens, type, common elements. Variant files only change layout and accents */
+:root {
+  --ground: #f2f4f5;
+  --paper: #ffffff;
+  --ink: #161b20;
+  --ink-2: #3a444d;
+  --muted: #6b7680;
+  --rule: #e1e6ea;
+  --accent: #155e7a;
+  --accent-soft: #e6f0f4;
+  --side: #f5f7f8;
+  --f-display: "Golos Text", system-ui, sans-serif;
+  --f-body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --s-2: 0.75rem;
+  --s-1: 0.8125rem;
+  --s-0: 0.9375rem;
+  --s1: 1.0625rem;
+  --s2: 1.25rem;
+  --s3: 2.25rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground: #0c1013; --paper: #141a1f; --ink: #e6ebee; --ink-2: #c3ccd3; --muted: #8f9ba5;
+    --rule: #26303768; --accent: #79b9d6; --accent-soft: #17262f; --side: #182027; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ground: #0c1013; --paper: #141a1f; --ink: #e6ebee; --ink-2: #c3ccd3; --muted: #8f9ba5;
+  --rule: #26303768; --accent: #79b9d6; --accent-soft: #17262f; --side: #182027; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--ground); color: var(--ink);
+  font-family: var(--f-body); font-size: var(--s-0); line-height: 1.55;
+  padding-inline: 16px; padding-block: 32px 48px;
+  -webkit-font-smoothing: antialiased;
+}
+.sheet { max-width: 900px; margin-inline: auto; background: var(--paper); }
+.draft {
+  font-family: var(--f-mono); font-size: var(--s-2); color: var(--muted);
+  letter-spacing: 0.02em; border-bottom: 1px dashed var(--rule); padding-bottom: 10px;
+}
+h1 { margin: 0; font-family: var(--f-display); text-wrap: balance; }
+.role { margin: 0; font-weight: 500; }
+.where { margin: 0; color: var(--muted); }
+.contacts { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: var(--s-1); }
+.contacts li { min-width: 0; overflow-wrap: anywhere; }
+.ph { color: var(--muted); font-style: italic; }
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; overflow-wrap: anywhere; }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
+section { display: grid; gap: 12px; min-width: 0; }
+h2 { margin: 0; }
+p { margin: 0; }
+ul { margin: 0; padding-left: 1.05em; display: grid; gap: 5px; }
+li { padding-left: 2px; color: var(--ink-2); }
+li::marker { color: var(--accent); }
+.job-body { display: grid; gap: 8px; min-width: 0; }
+h3 { margin: 0; font-size: var(--s1); font-weight: 600; line-height: 1.35; }
+h3 .title { font-weight: 400; color: var(--muted); }
+.meta { color: var(--muted); font-size: var(--s-1); }
+.period { display: grid; gap: 6px; }
+h4 { margin: 0; font-size: var(--s-0); font-weight: 600; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; }
+.d, .when { font-family: var(--f-mono); font-size: var(--s-2); color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.01em; white-space: nowrap; }
+.early ul { padding-left: 0; }
+.early li { list-style: none; }
+.skills { margin: 0; display: grid; gap: 8px; }
+.skill { display: grid; gap: 1px; }
+.skill dt { font-size: var(--s-1); font-weight: 600; color: var(--ink); }
+.skill dd { margin: 0; color: var(--ink-2); min-width: 0; }
+.proj b { color: var(--ink); }
+.job-body > p { color: var(--muted); font-size: var(--s-1); }
+ul.sub { margin-top: 3px; gap: 2px; padding-left: 1.1em; list-style-type: "– "; }
+ul.sub li::marker { color: var(--muted); }
+@media print { .draft { display: none; } body { background: #fff; padding: 0; } }
+/* Variant 1 — classic single column: company and dates on one line, sub-periods hang off a thin rule */
+.sheet { padding-block: 48px 52px; padding-inline: clamp(20px, 6vw, 64px); border-radius: 4px; box-shadow: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 28px rgb(0 0 0 / 0.06); display: grid; gap: 30px; }
+header { display: grid; gap: 8px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+h1 { font-size: var(--s3); font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+.role { font-size: var(--s2); color: var(--accent); }
+.contacts { margin-top: 6px; }
+.cols, .col-main, .col-side { display: grid; gap: 30px; min-width: 0; }
+h2 { display: flex; align-items: center; gap: 12px; font-size: var(--s-2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); }
+h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+[data-sec="exp"] { gap: 26px; }
+.job { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+.job > .when { grid-column: 2; grid-row: 1; padding-top: 3px; }
+.job > .job-body { grid-column: 1 / -1; grid-row: 1; }
+.job h3 { padding-right: 9.5rem; }
+.period { margin-top: 6px; padding-left: 16px; border-left: 2px solid var(--rule); }
+.skill { grid-template-columns: 11rem minmax(0, 1fr); gap: 2px 18px; }
+@media (max-width: 640px) {
+  .job { grid-template-columns: minmax(0, 1fr); }
+  .job > .when { grid-column: 1; grid-row: 1; padding-top: 0; }
+  .job > .job-body { grid-column: 1; grid-row: 2; }
+  .job h3 { padding-right: 0; }
+  .skill { grid-template-columns: minmax(0, 1fr); }
+}
+@page { size: A4; margin: 10mm 13mm; }
+@media print {
+  :root, :root:not([data-theme="light"]), :root[data-theme="dark"] {
+    --ground: #fff; --paper: #fff; --ink: #161b20; --ink-2: #3a444d; --muted: #6b7680;
+    --rule: #e1e6ea; --accent: #155e7a; --accent-soft: #e6f0f4; --side: #f5f7f8; color-scheme: light;
+    --s-2: 7.5pt; --s-1: 8pt; --s-0: 9pt; --s1: 10pt; --s2: 11pt; --s3: 20pt;
+  }
+  body { line-height: 1.38; margin: 0; }
+  h2 { letter-spacing: 0.05em; } /* wide tracking makes text extractors read «E X P E R I E N C E» */
+  .sheet { box-shadow: none; padding: 0; gap: 14px; max-width: none; border-radius: 0; }
+  header { padding-bottom: 12px; gap: 4px; }
+  .cols, .col-main, .col-side { gap: 14px; }
+  section { gap: 7px; }
+  ul { gap: 2px; }
+  [data-sec="exp"] { gap: 12px; }
+  /* A grid that holds a page break drops the space it pushes to the next page, and the next block overlaps. Print uses block flow with the same spacing */
+  .sheet, .cols, .col-main, .col-side, section { display: block; }
+  .sheet > .cols, .cols > .col-side, .col-main > section + section, .col-side > section + section { margin-top: 14px; }
+  section > h2 { margin-bottom: 7px; } [data-sec="exp"] > h2 { margin-bottom: 12px; } [data-sec="exp"] > .job + .job { margin-top: 12px; }
+  .job-body, .period { display: block; }
+  .job-body > * + * { margin-top: 5px; } .job-body > .period { margin-top: 8px; } .period > h4 { margin-bottom: 6px; }
+  h4 { break-after: avoid; }
+  .skills { gap: 5px; }
+  .job-body { gap: 5px; }
+  .period { margin-top: 3px; }
+  .job h3 { padding-right: 8rem; }
+  .skill { grid-template-columns: 9.8rem minmax(0, 1fr); }
+}
+/* Dates E: timeline, dates right-aligned against a thin line, a dot on the line for every bullet */ [data-sec="exp"] .period > ul:has(li.dated) { gap: 0; } [data-sec="exp"] li.dated { list-style: none; display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 0 12px; margin-left: -1.05em; padding-left: 0; } [data-sec="exp"] li.dated .y { text-align: right; padding-top: 0.22em; color: var(--muted); font-family: var(--f-mono); font-size: var(--s-2); white-space: nowrap; font-variant-numeric: tabular-nums; } [data-sec="exp"] li.dated .t { position: relative; padding: 0 0 8px 18px; border-left: 1px solid color-mix(in srgb, var(--muted) 45%, transparent); } [data-sec="exp"] li.dated:last-child .t { padding-bottom: 0; } [data-sec="exp"] li.dated .t::before { content: ""; position: absolute; left: -5px; top: 0.5em; width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px var(--paper); } [data-sec="exp"] .period:has(li.dated) { border-left: 0; padding-left: 0; } @media (max-width: 640px) { [data-sec="exp"] li.dated { grid-template-columns: minmax(0, 1fr); margin-left: 0; } [data-sec="exp"] li.dated .y { text-align: left; padding-left: 18px; border-left: 1px solid var(--rule); } } @media print { [data-sec="exp"] li.dated { grid-template-columns: 4.2rem minmax(0, 1fr); } [data-sec="exp"] li.dated .t { padding-bottom: 4px; } } </style>
+<style>
+.lang { max-width: 900px; margin: 0 auto 12px; display: flex; justify-content: flex-end; align-items: center; gap: 4px; }
+.lang .dl { margin-right: auto; font-size: var(--s-1); font-weight: 500; }
+.lang button {
+  font: 500 var(--s-1)/1 var(--f-mono); color: var(--muted); background: transparent;
+  border: 1px solid var(--rule); border-radius: 4px; padding: 7px 11px; cursor: pointer;
+}
+.lang button[aria-pressed="true"] { color: var(--paper); background: var(--accent); border-color: var(--accent); }
+.lang button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+[hidden] { display: none !important; }
+@media print { .lang { display: none; } }
+</style>
+</head>
+<body>
+<nav class="lang" aria-label="Language"><a class="dl" data-lang="en" href="Ilya_Volkov_CV_EN.pdf" download>Download CV (PDF)</a><a class="dl" data-lang="ru" href="Ilya_Volkov_CV_RU.pdf" download hidden>Скачать резюме (PDF)</a><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="ru" aria-pressed="false">RU</button></nav>
+<div class="cv" lang="en" data-lang="en">
+<main class="sheet">
+<header>
+  <h1>Ilya Volkov</h1>
+  <p class="role">Backend / DevOps Engineer <span>· Python, Kubernetes</span></p>
+  <p class="where">Belgrade, Serbia · remote or hybrid in Belgrade</p>
+  <ul class="contacts"><li><a href="mailto:iillyyaa159@gmail.com">iillyyaa159@gmail.com</a></li><li>Telegram <a href="https://t.me/devtemp">@devtemp</a></li><li><a href="https://github.com/iillyyaa1997">github.com/iillyyaa1997</a></li><li><a href="https://cv.unicorns.place">cv.unicorns.place</a></li></ul>
+</header>
+<div class="cols"><div class="col-main">
+<section data-sec="about"><h2>Summary</h2>
+<p>In software development since 2017. For the past 6 years, I have worked on the backend and infrastructure of an online proctoring platform that runs in 8 regions and in dedicated client installations. Main stack: Python/Django, Celery, PostgreSQL, Kubernetes, Helm, GitLab CI. From 2021 to 2026, I was the release master and supported the platform in production. I work with Claude Code AI agents and integrate them into the team's workflows</p>
+</section>
+<section data-sec="exp"><h2>Experience</h2>
+<div class="job"><div class="when">Nov 2020 – Oct 2026</div><div class="job-body">
+<h3>Constructor Tech (formerly Examus, Alemira) <span class="title">— Backend / DevOps Engineer</span></h3>
+<p class="meta">Online proctoring platform · team of 10–20</p>
+<p>After Alemira acquired Examus, I moved to Alemira, which was later renamed Constructor Tech</p>
+<ul>
+<li>Release master for the proctoring product: shipped releases every week, later every two weeks</li>
+<li>Supported Kubernetes and the backend in production: investigated and fixed the causes of incidents, improved monitoring in Prometheus and Grafana</li>
+<li>Helped 3+ engineers get up to speed on the project and develop their skills; advised the team on infrastructure and releases</li>
+</ul>
+<div class="period"><h4>Constructor Tech, Belgrade <span class="d">Aug 2023 – Oct 2026</span></h4>
+<ul>
+<li class="dated"><span class="y">2026</span><span class="t">Prepared the proctoring services for installation with the platform's on-prem installer: packaged 6 services into the installation bundle, moved secrets out of the code in 6 repositories, took the installation process through to an E2E check in a test environment</span></li>
+<li class="dated"><span class="y">2026</span><span class="t">Built AI tools that the team used: Claude Code agent management, development and release skills for working with merge requests, Zulip and YouTrack, and a set of developer scripts</span></li>
+<li class="dated"><span class="y">2026</span><span class="t">As maintainer of the open-source Moodle plugin, shipped all 2026 releases and made it compatible with Moodle 5 — <a href="https://github.com/constructor-tech/alemira-proctor-moodle-plugin">github.com/constructor-tech/alemira-proctor-moodle-plugin</a></span></li>
+<li class="dated"><span class="y">2026</span><span class="t">Tested AI agents and spec-driven development with Constructor Studio (formerly Cypilot) on an experimental port of the backend from Django to .NET. Prototype: 119 of 119 routes, about 1,400 tests, about 77% coverage</span></li>
+<li class="dated"><span class="y">2025–2026</span><span class="t">Set up production and staging environments for the dedicated installations of two large clients — a university and a certification platform — and was the release manager for these installations: handled deployments, maintained separate release branches, troubleshot rollout issues</span></li>
+<li class="dated"><span class="y">2025–2026</span><span class="t">Wrote new APIs in .NET (Minimal API, EF Core) and moved parts of the Django backend to .NET</span></li>
+<li class="dated"><span class="y">2023–2024</span><span class="t">Moved 8 services to shared Helm charts and a single configuration for Redis, RabbitMQ and PostgreSQL. Tuned PostgreSQL for growing load and moved the databases to Postgres Operator</span></li>
+</ul>
+</div>
+<div class="period"><h4>Alemira, contract <span class="d">Mar 2022 – Jul 2023</span></h4>
+<ul>
+<li class="dated"><span class="y">2023</span><span class="t">Moved the platform from infrastructure in Russia to infrastructure abroad, using custom Helm charts and CI for separate GitLab and Kubernetes environments, and a Slack bot that synchronized branches between the GitLab instances</span></li>
+<li class="dated"><span class="y">2022–2023</span><span class="t">Automated builds and releases of the Electron desktop client for Windows and macOS, including notarization: a macOS runner on EC2 that starts on demand, white-label builds for several brands, and alpha → canary → current channels. Builds are distributed through a CDN (AWS CloudFront)</span></li>
+<li class="dated"><span class="y">2022–2023</span><span class="t">Wrote a shared Helm chart library and CI templates. Developed a Celery/RabbitMQ queue exporter whose metrics HPA used to scale the workers. Introduced werf and review environments, and deployed the platform to Azure AKS</span></li>
+<li class="dated"><span class="y">2022–2023</span><span class="t">Added a separate retention period for each client and reworked the background cleanup</span></li>
+</ul>
+</div>
+<div class="period"><h4>Examus <span class="d">Nov 2020 – Feb 2022</span></h4>
+<ul>
+<li class="dated"><span class="y">2021–2022</span><span class="t">Supported the regional installations together with an external DevOps team, as the person responsible for them on the company side</span></li>
+<li class="dated"><span class="y">2021–2022</span><span class="t">Prepared the face identification service to run in several regions: photos in S3 with per-region buckets, admin sign-in through GitLab, Sentry for each environment</span></li>
+<li class="dated"><span class="y">2021</span><span class="t">Implemented automatic deletion of exam video recordings after their retention period expires, as required by personal data protection law. Recordings are stored in S3; deletion runs in the background</span></li>
+<li class="dated"><span class="y">2021</span><span class="t">Launched the production environment in the European region: CI/CD deployment and Helm charts with autoscaling (HPA, VPA)</span></li>
+<li class="dated"><span class="y">2020–2021</span><span class="t">Set up autoscaling for ML services based on uWSGI and RabbitMQ metrics, as well as VPA</span></li>
+</ul>
+</div>
+</div></div>
+<div class="job"><div class="when">Nov 2019 – Nov 2020</div><div class="job-body">
+<h3>College Expert, Kazan <span class="title">— Backend / DevOps Engineer</span></h3>
+<ul>
+<li>Solely responsible for the backend and DevOps for two products: a mobile marketplace for services (iOS/Android) and the company's internal platform</li>
+<li>Developed the backend using Django/DRF with Channels (WebSocket) and Celery. Implemented two-stage payments with YooKassa, scheduling, push and SMS notifications, and map search with server-side clustering</li>
+<li>Independently set up the server and a self-hosted GitLab instance with runners for builds and deployments using docker-compose</li>
+</ul>
+</div></div>
+<div class="job early"><div class="when">2017 – 2019</div><div class="job-body">
+<h3>Earlier, Kazan</h3>
+<ul>
+<li><b>Soft-Artel</b> <span class="d">Feb 2019 – Sep 2019</span> · Node.js Developer: backend of the company's product — Node.js microservices with RabbitMQ and PostgreSQL; Docker builds and deployment to Kubernetes through GitLab CI</li>
+<li><b>Softcraft</b> <span class="d">Jun 2018 – Sep 2018</span> · Software Engineer: API for a customer's web service using C#/ASP.NET with Entity Framework and MSSQL</li>
+<li><b>PROFIT</b> <span class="d">Apr 2017 – May 2018</span> · Software Engineer: APIs and website scrapers in C# and Node.js, WinForms desktop applications</li>
+</ul>
+</div></div>
+</section>
+<section data-sec="proj" class="proj"><h2>Personal projects</h2>
+<ul>
+<li><b>Warren</b> — my own distributed system of nodes in different countries. I develop the whole product alone: architecture, backend, mobile, desktop and web clients, infrastructure and tests<ul class="sub">
+<li>management backend in Python (Litestar, PostgreSQL), node services in Go, client in Flutter: Android now, then iOS, macOS, Windows and Linux</li>
+<li>nodes update themselves, and each new version goes through a canary check based on metrics; the infrastructure is defined in Ansible</li>
+<li>E2E tests cover node failure, rollout and rollback</li>
+</ul></li>
+<li><b>Kubernetes platform</b> — my own k3s cluster on two servers that runs my applications and self-hosted services: task tracker, wiki, photo gallery. I built it and run it alone<ul class="sub">
+<li>GitOps with Argo CD, self-hosted GitLab with runners, secrets in SealedSecrets, Longhorn storage, databases on CloudNativePG</li>
+<li>monitoring with Prometheus, Loki and Grafana; alerts are sent to Telegram through a bot</li>
+<li>database backups to B2 with restore checks; all applications deploy through shared CI components and a Helm library</li>
+</ul></li>
+<li><b>uDeck</b> and <b>uZora</b> — open-source macOS apps in Swift — <a href="https://github.com/iillyyaa1997">github.com/iillyyaa1997</a><ul class="sub">
+<li>uDeck — a plugin panel at the top edge of the screen, with a plugin catalog and E2E tests in disposable virtual machines</li>
+<li>uZora — a menu bar agent that tracks the Mac's health (disk, temperature, battery) and passes the data to AI agents over MCP</li>
+</ul></li>
+</ul>
+</section>
+</div><aside class="col-side">
+<section data-sec="skills"><h2>Skills</h2>
+<dl class="skills">
+<div class="skill"><dt>Languages and platforms</dt><dd>Python (primary); also C#/.NET, Go, TypeScript, Swift, PHP, Bash</dd></div>
+<div class="skill"><dt>Backend</dt><dd>Django, DRF, Celery, FastAPI, .NET Minimal API, EF Core</dd></div>
+<div class="skill"><dt>Databases and queues</dt><dd>PostgreSQL, Redis, RabbitMQ, S3/MinIO</dd></div>
+<div class="skill"><dt>Kubernetes and CI/CD</dt><dd>Kubernetes (EKS, k3s), Helm, werf, Argo CD, GitLab CI, Docker</dd></div>
+<div class="skill"><dt>Cloud and IaC</dt><dd>AWS, Azure AKS, Terraform, Ansible</dd></div>
+<div class="skill"><dt>Monitoring</dt><dd>Prometheus, Grafana, Loki, Sentry, Datadog, OpenTelemetry</dd></div>
+<div class="skill"><dt>Integrations</dt><dd>Moodle, Canvas, D2L, Keycloak, Entra ID, LDAP</dd></div>
+<div class="skill"><dt>AI in development</dt><dd>Claude Code (agents, MCP, skills), Constructor Studio (formerly Cypilot)</dd></div>
+</dl></section>
+<section data-sec="edu"><h2>Education and languages</h2>
+<ul>
+<li>Interregional Competence Center — Kazan College of Information Technology and Communications, 2013–2017. Secondary vocational diploma with honors; qualification: programming technician</li>
+<li>Russian — native. English — B1: I read technical documentation and handle work correspondence</li>
+</ul>
+</section>
+</aside></div>
+</main>
+</div>
+<div class="cv" lang="ru" data-lang="ru" hidden>
+<main class="sheet">
+<header>
+  <h1>Илья Волков</h1>
+  <p class="role">Backend / DevOps-инженер <span>· Python, Kubernetes</span></p>
+  <p class="where">Белград, Сербия · удалённо или гибрид в Белграде</p>
+  <ul class="contacts"><li><a href="mailto:iillyyaa159@gmail.com">iillyyaa159@gmail.com</a></li><li>Telegram <a href="https://t.me/devtemp">@devtemp</a></li><li><a href="https://github.com/iillyyaa1997">github.com/iillyyaa1997</a></li><li><a href="https://cv.unicorns.place">cv.unicorns.place</a></li></ul>
+</header>
+<div class="cols"><div class="col-main">
+<section data-sec="about"><h2>О себе</h2>
+<p>С 2017 года в разработке, последние 6 лет занимаюсь бэкендом и инфраструктурой платформы онлайн-прокторинга, которая работает в 8 регионах и на выделенных инсталляциях клиентов. Основной стек — Python/Django, Celery, PostgreSQL, Kubernetes, Helm, GitLab CI. В 2021–2026 был релиз-мастером и сопровождал платформу в продакшене. Работаю с AI-агентами Claude Code и внедряю их в процессы команды</p>
+</section>
+<section data-sec="exp"><h2>Опыт</h2>
+<div class="job"><div class="when">11.2020 – 10.2026</div><div class="job-body">
+<h3>Constructor Tech (ранее Examus, Alemira) <span class="title">— Backend / DevOps Engineer</span></h3>
+<p class="meta">Платформа онлайн-прокторинга · команда 10–20 человек</p>
+<p>После покупки Examus компанией Alemira я перешёл в Alemira, которую позже переименовали в Constructor Tech</p>
+<ul>
+<li>Релиз-мастер продукта прокторинга: выпускал релизы каждую неделю, позже — раз в две недели</li>
+<li>Поддерживал Kubernetes и бэкенд в продакшене: разбирался в причинах сбоев и устранял их, дорабатывал мониторинг в Prometheus и Grafana</li>
+<li>Помогал 3+ инженерам освоиться в проекте и развиваться, консультировал команду по инфраструктуре и релизам</li>
+</ul>
+<div class="period"><h4>Constructor Tech, Белград <span class="d">08.2023 – 10.2026</span></h4>
+<ul>
+<li class="dated"><span class="y">2026</span><span class="t">Подготовил сервисы прокторинга к установке через on-prem инсталлятор платформы: упаковал 6 сервисов в установочный пакет, вынес секреты из кода в 6 репозиториях, довёл установку до E2E-проверки на стенде</span></li>
+<li class="dated"><span class="y">2026</span><span class="t">Сделал AI-инструменты, которыми пользовалась команда: управление агентами Claude Code, навыки для разработки и релизов с MR, Zulip и YouTrack, набор скриптов для разработчиков</span></li>
+<li class="dated"><span class="y">2026</span><span class="t">Как мейнтейнер open-source Moodle-плагина выпустил все релизы 2026 года и обеспечил совместимость с Moodle 5 — <a href="https://github.com/constructor-tech/alemira-proctor-moodle-plugin">github.com/constructor-tech/alemira-proctor-moodle-plugin</a></span></li>
+<li class="dated"><span class="y">2026</span><span class="t">Проверил AI-агентов и разработку по спецификациям Constructor Studio (ранее Cypilot) на экспериментальном переносе бэкенда с Django на .NET. Прототип: 119 из 119 маршрутов, около 1,4 тыс. тестов, покрытие около 77%</span></li>
+<li class="dated"><span class="y">2025–2026</span><span class="t">Настроил продакшен и стейдж для выделенных инсталляций двух крупных клиентов — университета и сертификационной платформы — и был релиз-менеджером этих инсталляций: деплоил, вёл отдельные релизные ветки, разбирал проблемы выкатки</span></li>
+<li class="dated"><span class="y">2025–2026</span><span class="t">Писал новые API на .NET (Minimal API, EF Core) и переносил на него части Django-бэкенда</span></li>
+<li class="dated"><span class="y">2023–2024</span><span class="t">Перевёл 8 сервисов на общие Helm-чарты и единую конфигурацию Redis, RabbitMQ и PostgreSQL. Оптимизировал PostgreSQL под рост нагрузки и перенёс базы на Postgres-operator</span></li>
+</ul>
+</div>
+<div class="period"><h4>Alemira, контракт <span class="d">03.2022 – 07.2023</span></h4>
+<ul>
+<li class="dated"><span class="y">2023</span><span class="t">Перенёс платформу с российской инфраструктуры на зарубежную: собственные Helm-чарты и CI под отдельные GitLab и Kubernetes, Slack-бот для синхронизации веток между GitLab</span></li>
+<li class="dated"><span class="y">2022–2023</span><span class="t">Автоматизировал сборку и выпуск десктопного клиента на Electron для Windows и macOS с нотаризацией: macOS-раннер на EC2 поднимается по требованию, white-label под несколько брендов, каналы alpha → canary → current. Сборки раздаются через CDN (AWS CloudFront)</span></li>
+<li class="dated"><span class="y">2022–2023</span><span class="t">Написал общую библиотеку Helm-чартов и CI-шаблоны. Разработал exporter очередей Celery/RabbitMQ, по которому HPA масштабировал воркеры. Внедрил werf и review-окружения, развернул платформу в Azure AKS</span></li>
+<li class="dated"><span class="y">2022–2023</span><span class="t">Добавил отдельный срок хранения записей для каждого клиента и переделал фоновую очистку</span></li>
+</ul>
+</div>
+<div class="period"><h4>Examus <span class="d">11.2020 – 02.2022</span></h4>
+<ul>
+<li class="dated"><span class="y">2021–2022</span><span class="t">Вместе с внешней DevOps-командой сопровождал региональные инсталляции, отвечая за них со стороны компании</span></li>
+<li class="dated"><span class="y">2021–2022</span><span class="t">Подготовил сервис идентификации по лицу к работе в нескольких регионах: фото в S3 с бакетами по регионам, вход в админку через GitLab, Sentry для каждого окружения</span></li>
+<li class="dated"><span class="y">2021</span><span class="t">Сделал автоматическое удаление видеозаписей экзаменов после окончания срока хранения, как требует закон о персональных данных. Записи хранятся в S3, удаление идёт в фоне</span></li>
+<li class="dated"><span class="y">2021</span><span class="t">Запустил продакшен в европейском регионе: CI/CD-деплой и Helm-чарты с автомасштабированием (HPA, VPA)</span></li>
+<li class="dated"><span class="y">2020–2021</span><span class="t">Настроил автомасштабирование ML-сервисов по метрикам uWSGI и RabbitMQ, а также VPA</span></li>
+</ul>
+</div>
+</div></div>
+<div class="job"><div class="when">11.2019 – 11.2020</div><div class="job-body">
+<h3>Коллегия Эксперт (College expert), Казань <span class="title">— Backend / DevOps-инженер</span></h3>
+<ul>
+<li>Единолично отвечал за бэкенд и DevOps двух продуктов: мобильного маркетплейса услуг (iOS/Android) и внутренней платформы компании</li>
+<li>Разрабатывал бэкенд на Django/DRF с Channels (WebSocket) и Celery. Реализовал двухстадийные платежи ЮKassa, расписания, push- и SMS-уведомления, поиск на карте с серверной кластеризацией</li>
+<li>Самостоятельно настроил сервер и self-hosted GitLab с раннерами для сборки и развёртывания через docker-compose</li>
+</ul>
+</div></div>
+<div class="job early"><div class="when">2017 – 2019</div><div class="job-body">
+<h3>Ранее, Казань</h3>
+<ul>
+<li><b>Soft-Artel</b> <span class="d">02.2019 – 09.2019</span> · Node.js-разработчик: бэкенд продукта компании — микросервисы на Node.js с RabbitMQ и PostgreSQL; сборка в Docker и деплой в Kubernetes через GitLab CI</li>
+<li><b>Softcraft</b> <span class="d">06.2018 – 09.2018</span> · Инженер-программист: API веб-сервиса заказчика на C#/ASP.NET с Entity Framework и MSSQL</li>
+<li><b>PROFIT</b> <span class="d">04.2017 – 05.2018</span> · Инженер-программист: API и парсеры сайтов на C# и Node.js, настольные приложения на WinForms</li>
+</ul>
+</div></div>
+</section>
+<section data-sec="proj" class="proj"><h2>Личные проекты</h2>
+<ul>
+<li><b>Warren</b> — собственная распределённая система из узлов в разных странах. Весь продукт разрабатываю один: архитектура, бэкенд, мобильный, десктопный и веб-клиенты, инфраструктура и тесты<ul class="sub">
+<li>бэкенд управления на Python (Litestar, PostgreSQL), сервисы на узлах на Go, клиент на Flutter: сейчас Android, дальше iOS, macOS, Windows и Linux</li>
+<li>узлы обновляются сами, новая версия проходит canary-проверку по метрикам; инфраструктура описана в Ansible</li>
+<li>E2E-тесты проверяют отказ узла, раскатку и откат</li>
+</ul></li>
+<li><b>Платформа на Kubernetes</b> — свой кластер k3s на двух серверах, на нём работают мои приложения и self-hosted сервисы: трекер задач, вики, фотогалерея. Собрал и веду его один<ul class="sub">
+<li>GitOps на Argo CD, свой GitLab с раннерами, секреты в SealedSecrets, хранилище Longhorn, базы на CloudNativePG</li>
+<li>мониторинг на Prometheus, Loki и Grafana, алерты приходят в Telegram через бота</li>
+<li>бэкапы баз в B2 с проверкой восстановления; все приложения деплоятся через общие CI-компоненты и Helm-библиотеку</li>
+</ul></li>
+<li><b>uDeck</b> и <b>uZora</b> — open-source приложения для macOS на Swift — <a href="https://github.com/iillyyaa1997">github.com/iillyyaa1997</a><ul class="sub">
+<li>uDeck — панель с плагинами у верхнего края экрана; есть каталог плагинов и E2E-тесты в одноразовых виртуальных машинах</li>
+<li>uZora — агент в строке меню: следит за состоянием Mac (диск, температура, батарея) и передаёт данные AI-агентам через MCP</li>
+</ul></li>
+</ul>
+</section>
+</div><aside class="col-side">
+<section data-sec="skills"><h2>Навыки</h2>
+<dl class="skills">
+<div class="skill"><dt>Языки и платформы</dt><dd>Python — основной; также C#/.NET, Go, TypeScript, Swift, PHP, Bash</dd></div>
+<div class="skill"><dt>Бэкенд</dt><dd>Django, DRF, Celery, FastAPI, .NET Minimal API, EF Core</dd></div>
+<div class="skill"><dt>Базы и очереди</dt><dd>PostgreSQL, Redis, RabbitMQ, S3/MinIO</dd></div>
+<div class="skill"><dt>Kubernetes и CI/CD</dt><dd>Kubernetes (EKS, k3s), Helm, werf, Argo CD, GitLab CI, Docker</dd></div>
+<div class="skill"><dt>Облака и IaC</dt><dd>AWS, Azure AKS, Terraform, Ansible</dd></div>
+<div class="skill"><dt>Мониторинг</dt><dd>Prometheus, Grafana, Loki, Sentry, Datadog, OpenTelemetry</dd></div>
+<div class="skill"><dt>Интеграции</dt><dd>Moodle, Canvas, D2L, Keycloak, Entra ID, LDAP</dd></div>
+<div class="skill"><dt>AI в разработке</dt><dd>Claude Code (агенты, MCP, навыки), Constructor Studio (ранее Cypilot)</dd></div>
+</dl></section>
+<section data-sec="edu"><h2>Образование и языки</h2>
+<ul>
+<li>Межрегиональный центр компетенций — Казанский техникум информационных технологий и связи, 2013–2017. Диплом СПО с отличием, техник-программист</li>
+<li>Русский — родной. Английский — B1: читаю техническую документацию, веду рабочую переписку</li>
+</ul>
+</section>
+</aside></div>
+</main>
+</div>
+<script>
+(function () {
+  var titles = { en: 'Ilya Volkov — CV', ru: 'Илья Волков — CV' };
+  function show(lang) {
+    if (!titles[lang]) { lang = 'en'; }
+    document.querySelectorAll('.cv, .dl').forEach(function (el) { el.hidden = el.dataset.lang !== lang; });
+    document.querySelectorAll('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
+    document.documentElement.lang = lang;
+    document.title = titles[lang];
+  }
+  document.querySelectorAll('.lang button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      show(b.dataset.lang);
+      history.replaceState(null, '', b.dataset.lang === 'ru' ? '#ru' : location.pathname + location.search);
+    });
+  });
+  window.addEventListener('hashchange', function () { show(location.hash.slice(1)); });
+  show(location.hash.slice(1));
+})();
+</script>
+</body>
+</html>
